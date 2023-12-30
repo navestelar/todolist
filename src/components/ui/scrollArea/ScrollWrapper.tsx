@@ -7,14 +7,10 @@ interface ScrollAreaProperties {
 }
 
 export default function ScrollWrapper({ children, className }: ScrollAreaProperties) {
-    const TAGS = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`)
-
     return (
         <ScrollArea.Root className={`w-full h-[225px] rounded overflow-hidden shadow-[0_2px_10px] shadow-blackA4 ${className}`}>
             <ScrollArea.Viewport className="w-full h-full rounded">
-            <div className="py-[15px] px-5">
                 {children}
-            </div>
             </ScrollArea.Viewport>
             <ScrollArea.Scrollbar
             className="flex select-none touch-none p-0.5 bg-blackA3 transition-colors duration-[160ms] ease-out hover:bg-blackA5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"

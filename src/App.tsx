@@ -9,6 +9,7 @@ import CheckboxChecked from "./assets/CheckboxChecked.svg"
 import CheckboxUnchecked from "./assets/CheckboxUnchecked.svg"
 import { v4 as id } from 'uuid'
 import ScrollWrapper from './components/ui/scrollArea/ScrollWrapper'
+import { Reorder } from 'framer-motion'
 
 type Task = {
   id: string
@@ -19,11 +20,12 @@ type Task = {
 type Tasks = {
   [taskId: string]: Task
 }
-
 export default function App() {
   const [tasks, setTasks] = useState({})
 
   const [newTask, setNewTask] = useState('')
+
+  const [tasksKeys, setTasksKeys] = useState(Object.keys(tasks) as string[])
 
   const isNewTaskEmpty = newTask.length === 0
 
@@ -34,13 +36,15 @@ export default function App() {
       const taskId = id()
   
       setTasks((prevTasks) => ({
-        ...prevTasks,
         [newTask]: {
           id: taskId,
           content: newTask,
           isChecked: false,
         },
+        ...prevTasks,
       }))
+
+      setTasksKeys([newTask, ...tasksKeys])
     }
   }
 
@@ -92,22 +96,22 @@ export default function App() {
           </div>
           {Object.keys(tasks).length > 0 ? (
             <ScrollWrapper className='w-full h-[505px] mt-6'>
-              <div className="flex flex-col gap-3">
-                {Object.values(tasks).reverse().map((task) => 
-                  <div key={task.id} className="p-4 border border-gray-500 bg-gray-500 w-full rounded-lg flex justify-between items-start">
-                    <label className={`cursor-pointer text-[0.875rem] ${task.isChecked ? 'text-gray-300 line-through' : 'text-gray-100'}`}>
+              <Reorder.Group axis="y" values={tasksKeys} onReorder={setTasksKeys} className="flex flex-col gap-3">
+                {tasksKeys.map((taskKey) => 
+                  <Reorder.Item key={taskKey} value={taskKey} className="p-4 border border-gray-500 bg-gray-500 w-full rounded-lg flex justify-between items-start">
+                    <label className={`cursor-pointer text-[0.875rem] ${tasks[taskKey].isChecked ? 'text-gray-300 line-through' : 'text-gray-100'}`}>
                         <Checkbox
                           icon={<img src={ CheckboxUnchecked } />}
                           checkedIcon={<img src={ CheckboxChecked } />}
                         />
-                        { task.content }
+                        { tasks[taskKey].content }
                     </label>
                     <button className="transition-all ease-in-out duration-300 p-1 rounded-md text-gray-300 hover:text-red-400 hover:bg-gray-400">
                         <Trash size={18} />
                     </button>
-                  </div>
+                  </Reorder.Item>
                 )}
-              </div>
+              </Reorder.Group>
             </ScrollWrapper>
           ) : (
             <Empty />

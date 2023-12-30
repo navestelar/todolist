@@ -32,7 +32,7 @@ export default function App() {
   function addTask(event: FormEvent) {
     event.preventDefault()
 
-    if (!isNewTaskEmpty) {
+    if (!isNewTaskEmpty && !tasks[newTask]) {
       const taskId = id()
   
       setTasks((prevTasks) => ({

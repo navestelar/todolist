@@ -19,6 +19,7 @@
   type Tasks = {
     [taskId: string]: Task
   }
+
   export default function App() {
     const [tasks, setTasks] = useState<Tasks>({})
 
@@ -28,7 +29,7 @@
 
     const isNewTaskEmpty = newTask.length === 0
 
-    function addTask(event: FormEvent) {
+    function handleAddTask(event: FormEvent) {
       event.preventDefault()
 
       if (!isNewTaskEmpty && !tasks[newTask]) {
@@ -45,7 +46,11 @@
 
         setTasksKeys([newTask, ...tasksKeys])
       }
+
+      setNewTask('')
     }
+
+    console.log(newTask)
 
     function handleToggleCheckTask(taskKey: string) {
       setTasks((prevTasks) => {
@@ -74,15 +79,15 @@
           </h1>
         </header>
         <main className='w-full max-w-[46rem]'>
-          <form className='flex gap-2 mt-[-30px]'>
+          <form onSubmit={handleAddTask} className='flex gap-2 mt-[-30px]'>
             <input
               className="border border-gray-700 bg-gray-500 rounded-lg p-4 w-full text-base text-gray-100 focus:outline-purple-500 placeholder:text-gray-300"
               placeholder='Adicione uma nova tarefa'
+              value={newTask}
               onChange={(e) => setNewTask(e.target.value)}
             />
             <button 
               className='flex items-center bg-blue-600 gap-2 rounded-lg text-gray-100 font-bold p-4 hover:bg-blue-400 transition-all ease-in-out duration-300'
-              onClick={addTask}
             >
               Criar
               <PlusCircle size={16} />

@@ -68,8 +68,16 @@
     }
 
     function countFinishedTasks() {
-
-    }
+      let finishedTasks = 0;
+    
+      Object.values(tasks).forEach((task) => {
+        if (task.isChecked) {
+          finishedTasks++
+        }
+      })
+    
+      return finishedTasks
+    }    
     
     return (
       <div className='h-screen bg-gray-600 flex flex-col items-center'>
@@ -101,7 +109,7 @@
               </div>
               <div className='flex gap-[0.5rem]'>
                 <strong className='text-purple-300 text-[0.875rem]'>Concluídas</strong>
-                <span className='py-[2px] px-2 rounded-full bg-gray-400 text-gray-200 text-[0.75rem]'>{ Object.keys(tasks).length }</span>
+                <span className='py-[2px] px-2 rounded-full bg-gray-400 text-gray-200 text-[0.75rem]'>{`${countFinishedTasks()} ${countFinishedTasks() > 0 ? `de ${Object.keys(tasks).length}` : ''} `}</span>
               </div>
             </div>
             {Object.keys(tasks).length > 0 ? (
@@ -110,7 +118,7 @@
                   axis="y" 
                   values={tasksKeys} 
                   onReorder={setTasksKeys} 
-                  className="flex flex-col gap-3 py-[15px] px-5"
+                  className="flex flex-col gap-3 p-5"
                 >
                   {tasksKeys.map((taskKey) => 
                     <Reorder.Item 

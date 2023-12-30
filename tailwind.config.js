@@ -8,6 +8,7 @@ export default {
   theme: {
     extend: {},
     colors: {
+      transparent: 'transparent',
       'white': '#ffffff',
       'black': '#000000',
       'blue-600': '#1E6F9F',

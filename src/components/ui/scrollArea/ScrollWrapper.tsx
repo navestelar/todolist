@@ -4,11 +4,12 @@ import { ReactNode } from 'react'
 interface ScrollAreaProperties {
     children: ReactNode
     className?: string
+    ref?: any
 }
 
-export default function ScrollWrapper({ children, className }: ScrollAreaProperties) {
+export default function ScrollWrapper({ children, className, ref }: ScrollAreaProperties) {
     return (
-        <ScrollArea.Root className={`w-full h-[225px] rounded overflow-hidden shadow-[0_2px_10px] shadow-blackA4 ${className}`}>
+        <ScrollArea.Root ref={ref} className={`w-full h-[225px] rounded overflow-hidden shadow-[0_2px_10px] shadow-blackA4 ${className}`}>
             <ScrollArea.Viewport className="w-full h-full rounded">
                 {children}
             </ScrollArea.Viewport>

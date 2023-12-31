@@ -1,6 +1,6 @@
-  import { FormEvent, useState } from 'react'
+  import { FormEvent, useRef, useState } from 'react'
   import Logo from "./assets/Logotipo.png"
-  import { DotsSixVertical, PlusCircle } from "@phosphor-icons/react"
+  import { CaretCircleUp, CaretDoubleUp, CaretDown, CaretUp, DotsSixVertical, PlusCircle } from "@phosphor-icons/react"
   import Empty from './components/Empty'
   import { Checkbox } from '@mui/material'
   import { Trash } from '@phosphor-icons/react'
@@ -77,6 +77,15 @@
       })
     
       return finishedTasks
+    }
+    
+    const scrollRef = useRef(null)
+
+    function handleScrollUp() {
+    
+      if (scrollRef.current) {
+        scrollRef.current.scrollTop -= 1
+      }
     }    
     
     return (
@@ -113,7 +122,10 @@
               </div>
             </div>
             {Object.keys(tasks).length > 0 ? (
-              <ScrollWrapper className='w-full h-[505px] mt-6'>
+              <ScrollWrapper ref={scrollRef} className='w-full h-[505px] mt-6'>
+                <div className='flex items-center justify-center text-gray-300 transition-all duration-200 ease-in-out w-full h-[45px] bg-gray-700 opacity-25 absolute z-10 hover:opacity-75' onMouseEnter={handleScrollUp}>
+                  <CaretUp size={32} />
+                </div>
                 <Reorder.Group 
                   axis="y" 
                   values={tasksKeys} 
@@ -144,6 +156,12 @@
                     </Reorder.Item>
                   )}
                 </Reorder.Group>
+                <div 
+                  className='bottom-0 flex items-center justify-center text-gray-300 transition-all duration-200 ease-in-out w-full h-[45px] bg-gray-700 opacity-25 absolute z-10 hover:opacity-75' 
+                  onMouseEnter={handleScrollUp}
+                >
+                  <CaretDown size={32} />
+                </div>
               </ScrollWrapper>
             ) : (
               <Empty />

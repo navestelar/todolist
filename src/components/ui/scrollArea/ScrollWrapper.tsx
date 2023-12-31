@@ -8,8 +8,8 @@ interface ScrollWrapperProps {
 
 const ScrollWrapper = forwardRef<HTMLDivElement, ScrollWrapperProps>((props, ref) => {
     return (
-        <ScrollArea.Root className={`w-full h-[225px] rounded overflow-hidden shadow-[0_2px_10px] shadow-blackA4 ${props.className}`}>
-            <ScrollArea.Viewport ref={ref} className="w-full h-full rounded">
+        <ScrollArea.Root className={`w-full rounded overflow-hidden shadow-[0_2px_10px] shadow-blackA4 ${props.className}`}>
+            <ScrollArea.Viewport ref={ref} className="w-full h-full max-h-[505px] py-5 rounded">
                 {props.children}
             </ScrollArea.Viewport>
             <ScrollArea.Scrollbar

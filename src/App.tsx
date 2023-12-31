@@ -108,7 +108,7 @@
             <img src={ Logo } />
           </h1>
         </header>
-        <main className='w-full max-w-[46rem]'>
+        <main className='w-full max-w-[50rem] px-4'>
           <form onSubmit={handleAddTask} className='flex gap-2 mt-[-30px]'>
             <input
               className="border border-gray-700 bg-gray-500 rounded-lg p-4 w-full text-base text-gray-100 focus:outline-purple-500 placeholder:text-gray-300"
@@ -135,7 +135,7 @@
               </div>
             </div>
             {Object.keys(tasks).length > 0 ? (
-              <ScrollWrapper /*ref={scrollRef}*/ className='w-full h-[505px] mt-6'>
+              <ScrollWrapper /*ref={scrollRef}*/ className='w-full my-4'>
                 {/* <div 
                   className='flex items-center justify-center text-gray-300 transition-all duration-200 ease-in-out w-full h-[45px] bg-gray-700 opacity-25 absolute z-10 hover:opacity-75' 
                   onMouseEnter={handleScrollUp}
@@ -146,7 +146,7 @@
                   axis="y" 
                   values={tasksKeys} 
                   onReorder={setTasksKeys} 
-                  className="flex flex-col gap-3 p-5"
+                  className="flex flex-col gap-3 px-5"
                 >
                   {tasksKeys.map((taskKey) => 
                     <Reorder.Item 

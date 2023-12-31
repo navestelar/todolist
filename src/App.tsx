@@ -50,6 +50,13 @@
       setNewTask('')
     }
 
+    function handleDeleteTask(taskKey: string) {
+      const tasksUpdated = tasks
+      delete tasksUpdated[taskKey]
+      setTasks(tasksUpdated)
+      setTasksKeys(tasksKeys.filter(taskKeyItem => taskKeyItem !== taskKey))
+    }
+
     function handleToggleCheckTask(taskKey: string) {
       setTasks((prevTasks) => {
         const updatedTasks: Tasks = { ...prevTasks }
@@ -157,7 +164,10 @@
                           { tasks[taskKey].content }
                       </label>
                       <div className='flex text-gray-300'>
-                        <button className="transition-all ease-in-out duration-300 p-1 rounded-md hover:text-red-400 hover:bg-gray-400">
+                        <button 
+                          className="transition-all ease-in-out duration-300 p-1 rounded-md hover:text-red-400 hover:bg-gray-400"
+                          onClick={() => handleDeleteTask(tasks[taskKey].content)}
+                        >
                           <Trash size={18} />
                         </button>
                         <DotsSixVertical size={32} className='cursor-pointer' />

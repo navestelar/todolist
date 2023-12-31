@@ -77,22 +77,22 @@
       return finishedTasks
     }
 
-    const scrollRef = useRef<HTMLDivElement>(null);
+    // const scrollRef = useRef<HTMLDivElement>(null);
 
-    function handleScrollUp() {
-      if (scrollRef.current) {
-        const scrollToTop = () => {
-          const currentScrollTop = scrollRef.current.scrollTop;
+    // function handleScrollUp() {
+    //   if (scrollRef.current) {
+    //     const scrollToTop = () => {
+    //       const currentScrollTop = scrollRef.current.scrollTop;
     
-          if (currentScrollTop > 0) {
-            scrollRef.current.scrollTop = currentScrollTop - 1;
-            requestAnimationFrame(scrollToTop);
-          }
-        };
+    //       if (currentScrollTop > 0) {
+    //         scrollRef.current.scrollTop = currentScrollTop - 1;
+    //         requestAnimationFrame(scrollToTop);
+    //       }
+    //     };
     
-        scrollToTop();
-      }
-    }
+    //     scrollToTop();
+    //   }
+    // }
     
     return (
       <div className='h-screen bg-gray-600 flex flex-col items-center'>
@@ -128,13 +128,13 @@
               </div>
             </div>
             {Object.keys(tasks).length > 0 ? (
-              <ScrollWrapper ref={scrollRef} className='w-full h-[505px] mt-6'>
-                <div 
+              <ScrollWrapper /*ref={scrollRef}*/ className='w-full h-[505px] mt-6'>
+                {/* <div 
                   className='flex items-center justify-center text-gray-300 transition-all duration-200 ease-in-out w-full h-[45px] bg-gray-700 opacity-25 absolute z-10 hover:opacity-75' 
                   onMouseEnter={handleScrollUp}
                 >
                   <CaretUp size={32} />
-                </div>
+                </div> */}
                 <Reorder.Group 
                   axis="y" 
                   values={tasksKeys} 
@@ -165,12 +165,12 @@
                     </Reorder.Item>
                   )}
                 </Reorder.Group>
-                <div 
+                {/* <div 
                   className='bottom-0 flex items-center justify-center text-gray-300 transition-all duration-200 ease-in-out w-full h-[45px] bg-gray-700 opacity-25 absolute z-10 hover:opacity-75' 
                   // onMouseEnter={handleScrollUp}
                 >
                   <CaretDown size={32} />
-                </div>
+                </div> */}
               </ScrollWrapper>
             ) : (
               <Empty />

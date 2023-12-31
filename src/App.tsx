@@ -1,6 +1,6 @@
-  import { FormEvent, useRef, useState } from 'react'
+  import { FormEvent, useState } from 'react'
   import Logo from "./assets/Logotipo.png"
-  import { CaretDown, CaretUp, DotsSixVertical, PlusCircle } from "@phosphor-icons/react"
+  import { DotsSixVertical, PlusCircle } from "@phosphor-icons/react"
   import Empty from './components/Empty'
   import { Checkbox } from '@mui/material'
   import { Trash } from '@phosphor-icons/react'
